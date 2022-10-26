@@ -1,0 +1,57 @@
+typeset -A ZI
+ZI[BIN_DIR]="${HOME}/.zi/bin"
+if [ ! -d ${ZI[BIN_DIR]} ]; then
+    mkdir -p "$ZI[BIN_DIR]"
+    git clone git@github.com:z-shell/zi.git "$ZI[BIN_DIR]"
+fi
+source "${ZI[BIN_DIR]}/zi.zsh"
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
+
+ZI_FROM="from=hub.nuaa.cf" 
+
+zi wait lucid for \
+  atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+     z-shell/F-Sy-H \
+  blockf \
+     zsh-users/zsh-completions \
+  atload"!_zsh_autosuggest_start" \
+     zsh-users/zsh-autosuggestions
+
+zstyle ":history-search-multi-word" page-size "11"
+zi ice wait lucid
+zi light z-shell/H-S-MW
+
+zi ice $ZI_FROM lucid wait='!0' compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zi light sindresorhus/pure
+RPROMPT="%F{red}%(?..%?)%f"
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
+bindkey '\eh' backward-word
+bindkey '\el' forward-word
+bindkey '\ej' down-line-or-history
+bindkey '\ek' up-line-or-history
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+bindkey -s '\eo' 'cd ..\n'
+alias ll='ls -alh --color=auto'
+bindkey -s '\e;' 'ls -alh --color=auto\n'
+
