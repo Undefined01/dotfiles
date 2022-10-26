@@ -1,0 +1,10 @@
+[core]
+	autocrlf = input
+[user]
+	email = amoscr@163.com
+	name = Undefined01
+	signingkey = 77E1D17E9CA01924BC8A0FD7CD40B1410BA0D1DF
+[color]
+	ui = true
+[commit]
+	gpgsign = true
