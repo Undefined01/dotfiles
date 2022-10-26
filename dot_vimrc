@@ -1,0 +1,30 @@
+set nocompatible
+
+set showmode
+set showcmd
+
+set autoindent
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+set number
+set relativenumber
+set cursorline
+set wrap
+set linebreak
+set scrolloff=5
+set ruler
+
+set showmatch
+set hlsearch
+set incsearch
+
+set history=1000
+
+set listchars=tab:»■,trail:■
+set list
+
+set wildmenu
+set wildmode=longest:list,full
