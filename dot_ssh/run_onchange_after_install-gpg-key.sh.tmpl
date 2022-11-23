@@ -7,6 +7,7 @@ echo {{ .passphrase | quote }} | gpg --yes --passphrase-fd 0 --pinentry-mode loo
 
 # Export gpg key to ssh
 # gpg -o ecc_sec.gpg --armor --export-secret-key --export-options export-backup amoscr@163.com
+# gpg -o ecc_pub.gpg --armor --export --export-options export-backup amoscr@163.com
 # gpg --export-secret-keys amoscr@163.com | openpgp2ssh 01234567 > id_rsa
 # ssh-keygen -y -f id_rsa > id_rsa.pub
 
