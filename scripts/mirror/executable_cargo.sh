@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -e
+#!/bin/sh -e
 
 if [ ! -f "$HOME/.cargo/config" ]; then
     cat >"$HOME/.cargo/config" <<EOF

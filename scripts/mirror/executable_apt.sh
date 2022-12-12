@@ -1,6 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
 
-set -e
+if [ "$(whoami)" != "root" ]; then
+    echo "Need root priviledge"
+    exit 1
+fi
 
-sed -i /etc/apt/sources.list -E -e 's/:\/\/.*?\//:\/\/mirrors.ustc.edu.cn\//g'
-
+sed -i.bak /etc/apt/sources.list -E -e 's/:\/\/.*?\//:\/\/mirrors.ustc.edu.cn\//g'
+apt update
