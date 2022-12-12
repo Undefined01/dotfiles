@@ -1,5 +1,3 @@
-set -e
-
 LOG_LEVEL="${LOG_LEVEL:-2}"
 
 BINDIR="${BINDIR:-${HOME}/.local/bin}"

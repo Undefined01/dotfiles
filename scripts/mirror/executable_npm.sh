@@ -1,6 +1,4 @@
-#!/bin/sh
-
-set -e
+#!/bin/sh -e
 
 npm config set registry https://registry.npm.taobao.org
 
