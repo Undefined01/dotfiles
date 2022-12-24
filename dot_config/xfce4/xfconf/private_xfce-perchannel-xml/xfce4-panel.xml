@@ -42,6 +42,8 @@
         <value type="int" value="17"/>
         <value type="int" value="18"/>
         <value type="int" value="19"/>
+        <value type="int" value="23"/>
+        <value type="int" value="26"/>
         <value type="int" value="20"/>
         <value type="int" value="21"/>
         <value type="int" value="22"/>
@@ -64,9 +66,16 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “charmyxie_5g” active: charmyxie_5g (60%)"/>
+        <value type="string" value="wi-fi network connection “charmyxie_5g” active: charmyxie_5g (61%)"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="wi-fi network connection “charmyxie_5g” active: charmyxie_5g (55%)"/>
         <value type="string" value="wi-fi network connection “charmyxie_5g” active: charmyxie_5g (57%)"/>
         <value type="string" value="wi-fi network connection “charmyxie_5g” active: charmyxie_5g (56%)"/>
         <value type="string" value="no network connection"/>
+      </property>
+      <property name="known-items" type="array">
+        <value type="string" value="Fcitx"/>
       </property>
     </property>
     <property name="plugin-8" type="string" value="pulseaudio">
@@ -131,10 +140,23 @@
         <property name="label" type="string" value="n"/>
       </property>
       <property name="timeout" type="uint" value="1500"/>
+      <property name="uptime" type="empty">
+        <property name="enabled" type="bool" value="false"/>
+      </property>
     </property>
     <property name="plugin-25" type="string" value="separator">
       <property name="expand" type="bool" value="false"/>
       <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-23" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="16715900593.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-26" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="16715905214.desktop"/>
+      </property>
     </property>
   </property>
 </channel>
