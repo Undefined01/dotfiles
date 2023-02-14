@@ -1,0 +1,12 @@
+# Rime dictionary
+# encoding: utf-8
+
+---
+name: all
+version: "1"
+import_tables:
+  - dict/rime-ice/8105
+  - dict/rime-ice/base
+  - dict/rime-ice/sogou
+  - dict/zhwiki
+...
