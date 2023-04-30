@@ -8,7 +8,8 @@ source "${ZI[BIN_DIR]}/zi.zsh"
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 
-ZI_FROM="from=hub.nuaa.cf"
+ZI_FROM=""
+#ZI_FROM="from=hub.nuaa.cf"
 
 zstyle ':completion:*' menu yes select search
 
@@ -24,11 +25,18 @@ zstyle ":history-search-multi-word" page-size "11"
 zi ice $ZI_FROM wait lucid
 zi light z-shell/H-S-MW
 
-zi ice $ZI_FROM lucid wait='!0' compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zi light sindresorhus/pure
+#zi ice $ZI_FROM lucid wait='!0' compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+#zi light sindresorhus/pure
+
+zi light _local/cmdtime
 RPROMPT="%F{red}%(?..%?)%f"
 
-HISTFILE="$HOME/.zsh_history"
+alias ls='ls --color=auto'
+alias ll='ls -alh'
+alias grep='grep --color=auto'
+PS1='%F{green}%~%f%(!.#.$) '
+
+HISTFILE="$HOME/.bash_history"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -45,8 +53,12 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
 bindkey -e
-#bindkey '\eh' backward-word
-# bindkey '\el' forward-word
+bindkey -M emacs "^[[2~" overwrite-mode
+bindkey -M emacs "^[[3~" delete-char
+bindkey -M emacs "^[[H" beginning-of-line
+bindkey -M emacs "^[[F" end-of-line
+bindkey '\eh' backward-word
+bindkey '\el' forward-word
 
 autoload -z edit-command-line
 zle -N edit-command-line

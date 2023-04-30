@@ -15,7 +15,7 @@ pacman -S --needed --noconfirm adobe-source-code-pro-fonts adobe-source-sans-fon
 pacman -S --needed --noconfirm xfce4 xfce4-systemload-plugin
 pacman -S --needed --noconfirm fcitx5-im fcitx5-rime
 
-pacman -S --needed --noconfirm zsh wget curl vi vim git tldr zip unzip dust ripgrep jq fzf mcfly
+pacman -S --needed --noconfirm zsh wget curl vi vim git man tldr zip unzip dust ripgrep jq fzf mcfly
 pacman -S --needed --noconfirm ntfs-3g
 pacman -S --needed --noconfirm p7zip tumbler ffmpegthumbnailer parole gst-libav
 
