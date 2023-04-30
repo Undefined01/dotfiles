@@ -11,8 +11,7 @@ autoload -Uz _zi
 ZI_FROM=""
 #ZI_FROM="from=hub.nuaa.cf"
 
-zstyle ':completion:*' menu yes select search
-
+zstyle ':completion:*' menu select
 zi wait lucid $ZI_FROM for \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
      z-shell/F-Sy-H \
@@ -21,9 +20,12 @@ zi wait lucid $ZI_FROM for \
   atload"!_zsh_autosuggest_start" \
      zsh-users/zsh-autosuggestions
 
-zstyle ":history-search-multi-word" page-size "11"
-zi ice $ZI_FROM wait lucid
-zi light z-shell/H-S-MW
+[[ -n /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+[[ -n /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+
+#zstyle ":history-search-multi-word" page-size "11"
+#zi ice $ZI_FROM wait lucid
+#zi light z-shell/H-S-MW
 
 #zi ice $ZI_FROM lucid wait='!0' compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 #zi light sindresorhus/pure
@@ -53,12 +55,46 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 
 bindkey -e
-bindkey -M emacs "^[[2~" overwrite-mode
-bindkey -M emacs "^[[3~" delete-char
-bindkey -M emacs "^[[H" beginning-of-line
-bindkey -M emacs "^[[F" end-of-line
-bindkey '\eh' backward-word
-bindkey '\el' forward-word
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
+
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+
+# setup key accordingly
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         up-line-or-history
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       down-line-or-history
+[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"       backward-char
+[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"      forward-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
 
 autoload -z edit-command-line
 zle -N edit-command-line
@@ -66,4 +102,6 @@ bindkey '^x^e' edit-command-line
 
 bindkey -s '\eo' 'cd ..\n'
 alias ll='ls -alh --color=auto'
+
+VISUAL=vim
 
