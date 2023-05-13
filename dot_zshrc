@@ -14,7 +14,7 @@ ZI_FROM=""
 zstyle ':completion:*' menu select
 zi wait lucid $ZI_FROM for \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-     z-shell/F-Sy-H \
+     zsh-users/zsh-syntax-highlighting \
   blockf \
      zsh-users/zsh-completions \
   atload"!_zsh_autosuggest_start" \
