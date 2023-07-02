@@ -11,7 +11,7 @@ sed -i -E '/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/c\%sudo ALL=(ALL:ALL) NOPASSWD:
 
 
 # cli
-pacman -S --needed --noconfirm zsh wget curl vi vim git man tldr zip unzip dust ripgrep jq fzf
+pacman -S --needed --noconfirm zsh wget curl vi vim git man tldr zip unzip dust ripgrep fd jq fzf glances
 # tmux
 pacman -S --needed --noconfirm zellij
 # mcfly
