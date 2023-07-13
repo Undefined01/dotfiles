@@ -103,5 +103,5 @@ bindkey '^x^e' edit-command-line
 bindkey -s '\eo' 'cd ..\n'
 alias ll='ls -alh --color=auto'
 
-VISUAL=vim
+export VISUAL=vim
 
