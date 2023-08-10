@@ -20,8 +20,10 @@ zi wait lucid $ZI_FROM for \
   atload"!_zsh_autosuggest_start" \
      zsh-users/zsh-autosuggestions
 
-[[ -n /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
-[[ -n /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+if command -v fzf-share >/dev/null 2>&1; then
+  source $(fzf-share)/completion.zsh
+  source $(fzf-share)/key-bindings.zsh
+fi
 
 #zstyle ":history-search-multi-word" page-size "11"
 #zi ice $ZI_FROM wait lucid
@@ -101,7 +103,23 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 bindkey -s '\eo' 'cd ..\n'
-alias ll='ls -alh --color=auto'
 
-export VISUAL=vim
+if command -v exa >/dev/null 2>&1; then
+  alias ls='exa --color=auto'
+  alias ll='exa --color=auto --long --all --color-scale --extended'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls --color=auto -alh'
+fi
+
+if command -v fzf-share >/dev/null 2>&1; then
+  source $(fzf-share)/completion.bash
+  source $(fzf-share)/key-bindings.bash
+fi
+
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)"
+
+alias grep='grep --color=auto'
+
+command -v vim >/dev/null 2>&1 && export VISUAL='vim'
 

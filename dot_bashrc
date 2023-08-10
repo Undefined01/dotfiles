@@ -5,7 +5,24 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
-alias ll='ls -alh'
+if command -v exa >/dev/null 2>&1; then
+  alias ls='exa --color=auto'
+  alias ll='exa --color=auto --long --all --color-scale --extended'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls --color=auto -alh'
+fi
+
+if command -v fzf-share >/dev/null 2>&1; then
+  source $(fzf-share)/completion.bash
+  source $(fzf-share)/key-bindings.bash
+fi
+
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)"
+
 alias grep='grep --color=auto'
+
+command -v vim >/dev/null 2>&1 && export VISUAL='vim'
+
 PS1='\[\033[01;32m\]\w\[\033[00m\]\$ '
+
