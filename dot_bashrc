@@ -19,10 +19,12 @@ if command -v fzf-share >/dev/null 2>&1; then
 fi
 
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)"
+command -v bat >/dev/null 2>&1 && alias cat='bat'
+command -v delta >/dev/null 2>&1 && alias diff='delta'
 
 alias grep='grep --color=auto'
 
 command -v vim >/dev/null 2>&1 && export VISUAL='vim'
 
-PS1='\[\033[01;32m\]\w\[\033[00m\]\$ '
+PS1='\[\033[01;32m\]\w\[\033[00m\]`RET=$?; if [[ $RET != 0 ]]; then echo -n "!\[\033[31m\]$RET\[\033[00m\]"; fi`\$ '
 
