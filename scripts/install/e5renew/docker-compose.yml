@@ -3,7 +3,7 @@ services:
     renew:
         restart: always
         volumes:
-            - 'deploy:/renewx/Deploy'
+            - './Deploy:/renewx/Deploy'
             - 'appdata:/renewx/appdata'
         ports:
             - '127.0.0.1:1066:1066'
@@ -12,17 +12,17 @@ services:
     backup:
         image: alpine
         volumes:
-          - data:/backup-volume
+          - appdata:/backup-volume
           - ./backup:/backup
-        command: tar cavf /backup/data-backup.tar.gz /backup-volume
+        command: tar cavf /backup/data-backup.tar.gz -C /backup-volume .
         profiles: ["backup"]
     restore:
         image: alpine
         volumes:
-          - data:/backup-volume
+          - appdata:/backup-volume
           - ./backup:/backup
-        command: tar xaf /backup/data-backup.tar.gz /backup-volume
+        command: tar xaf /backup/data-backup.tar.gz -C /backup-volume .
         profiles: ["restore"]
 volumes:
-    data:
+    appdata:
 
