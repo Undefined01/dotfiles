@@ -5,6 +5,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+
+HISTSIZE=100000
+HISTFILLESIZE=100000
+HISTCONTROL=ignorespace
+
+
 if command -v exa >/dev/null 2>&1; then
   alias ls='exa --color=auto'
   alias ll='exa --color=auto --long --all --color-scale --extended'
@@ -21,10 +27,12 @@ fi
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)"
 command -v bat >/dev/null 2>&1 && alias cat='bat'
 command -v delta >/dev/null 2>&1 && alias diff='delta'
-
-alias grep='grep --color=auto'
-
+command -v grep >/dev/null 2>&1 && alias grep='grep --color=auto'
+command -v vi >/dev/null 2>&1 && export VISUAL='vi'
 command -v vim >/dev/null 2>&1 && export VISUAL='vim'
 
-PS1='\[\033[01;32m\]\w\[\033[00m\]`RET=$?; if [[ $RET != 0 ]]; then echo -n "!\[\033[31m\]$RET\[\033[00m\]"; fi`\$ '
+
+RETURN_VALUE_PROMPT='`RET=$?; if [[ $RET != 0 ]]; then echo -n "!\[\033[31m\]$RET\[\033[00m\]"; fi`'
+PS1='\[\033[01;32m\]\w\[\033[00m\]'"$RETURN_VALUE_PROMPT"'\$ '
+unset RETURN_VALUE_PROMPT
 
