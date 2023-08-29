@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+    alist:
+        restart: always
+        volumes:
+            - 'data:/opt/alist/data'
+        ports:
+            - '127.0.0.1:5244:5244'
+        environment:
+            - PUID=0
+            - PGID=0
+            - UMASK=022
+        container_name: alist
+        image: 'xhofe/alist-aria2:latest'
+    backup:
+        image: alpine
+        volumes:
+          - data:/backup-volume
+          - ./backup:/backup
+        command: tar caf /backup/data-backup.tar.gz -C /backup-volume .
+        profiles: ["backup"]
+volumes:
+    data:
+

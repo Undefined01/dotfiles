@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+    renew:
+        restart: always
+        volumes:
+            - 'deploy:/renewx/Deploy'
+            - 'appdata:/renewx/appdata'
+        ports:
+            - '127.0.0.1:1066:1066'
+        container_name: renew
+        image: 'gladtbam/ms365_e5_renewx:latest'
+    backup:
+        image: alpine
+        volumes:
+          - data:/backup-volume
+          - ./backup:/backup
+        command: tar cavf /backup/data-backup.tar.gz /backup-volume
+        profiles: ["backup"]
+    restore:
+        image: alpine
+        volumes:
+          - data:/backup-volume
+          - ./backup:/backup
+        command: tar xaf /backup/data-backup.tar.gz /backup-volume
+        profiles: ["restore"]
+volumes:
+    data:
+
