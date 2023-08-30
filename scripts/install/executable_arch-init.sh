@@ -36,8 +36,8 @@ pacman -S --needed --noconfirm sudo
 sed -i -E '/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/c\%sudo ALL=(ALL:ALL) NOPASSWD: ALL' /etc/sudoers
 
 # cli
-pacman -S --needed --noconfirm wget curl python vi vim git man zip unzip
-pacman -S --needed --noconfirm zsh fish tealdeer dust ripgrep fd jq fzf glances
+pacman -S --needed --noconfirm wget curl vi vim git less python man tar zip unzip p7zip zstd psmisc
+pacman -S --needed --noconfirm zsh fish git-delta exa bat tldr dust ripgrep fd jq fzf glances zoxide
 
 # bluetooth
 pacman -S --needed --noconfirm blueman
@@ -65,4 +65,6 @@ pacman -S --needed --noconfirm adobe-source-code-pro-fonts adobe-source-sans-fon
 pacman -S --needed --noconfirm gnu-free-fonts firefox
 pacman -S --needed --noconfirm p7zip mpv tumbler ffmpegthumbnailer
 pacman -S --needed --noconfirm fcitx5-im fcitx5-rime
+
+yay -S --needed --noconfirm shell_gpt
 
