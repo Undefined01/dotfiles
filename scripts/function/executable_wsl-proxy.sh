@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Make sure wsl can pass through windows firewall
+# New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)" -Action Allow
+
 set -e
 
 hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
@@ -15,8 +18,8 @@ set_proxy(){
     export https_proxy="${PROXY_HTTP}"
     export HTTPS_proxy="${PROXY_HTTP}"
 
-    export ALL_PROXY="${PROXY_SOCKS5}"
-    export all_proxy=${PROXY_SOCKS5}
+    export ALL_PROXY="${PROXY_HTTP}"
+    export all_proxy="${PROXY_HTTP}"
 }
 
 unset_proxy(){
@@ -32,6 +35,7 @@ test_setting(){
     echo "Host ip:" ${hostip}
     echo "WSL ip:" ${wslip}
     echo "Current proxy:" $https_proxy
+    echo 'Setup script: export {http_proxy,https_proxy,HTTP_PROXY,HTTPS_PROXY,all_proxy,ALL_PROXY}="'"${PROXY_HTTP}"'"'
 }
 
 if [ "$1" = "set" ]; then
