@@ -8,6 +8,8 @@ fi
 source "${ZINIT[BIN_DIR]}/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+autoload -Uz compinit
+compinit
 
 
 ZI_PROTO='proto=ssh'
@@ -134,3 +136,4 @@ command -v tldr >/dev/null 2>&1 && export TLDR_AUTO_UPDATE_DISABLED=1
 zi $ZI_PROTO $ZI_FROM depth'1' wait lucid for \
   has'fzf' \
     Aloxaf/fzf-tab
+
