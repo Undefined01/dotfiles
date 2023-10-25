@@ -48,7 +48,7 @@ echo "%$SUDOGROUP ALL=(ALL) ALL" > /etc/sudoers.d/$SUDOGROUP
 # sed -i -E '/# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/c\%sudo ALL=(ALL:ALL) NOPASSWD: ALL' /etc/sudoers
 
 # cli
-pacman -S --needed --noconfirm wget curl vi vim git less python man tar zip unzip p7zip zstd psmisc
+pacman -S --needed --noconfirm wget curl vi vim openssh git less python man tar zip unzip p7zip zstd psmisc
 pacman -S --needed --noconfirm zsh fish git-delta exa bat tldr dust ripgrep fd jq fzf glances zoxide
 
 # bluetooth

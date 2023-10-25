@@ -11,43 +11,7 @@ HISTFILESIZE=10000
 HISTCONTROL=ignorespace
 
 
-function init_ls() {
-  if command -v exa >/dev/null 2>&1; then
-    alias ls='exa --color=auto'
-    alias ll='exa --color=auto --long --all --color-scale --extended'
-  else
-    alias ls='ls --color=auto'
-    alias ll='ls --color=auto -alh'
-  fi
-}
-
-function init_fzf() {
-  local EXT=bash
-  local FZF_PATH
-  if command -v fzf-share >/dev/null 2>&1; then
-    FZF_PATH="$(fzf-share)"
-  elif command -v fzf >/dev/null 2>&1; then
-    if [ -f /usr/share/fzf/completion.$EXT ]; then
-      FZF_PATH=/usr/share/fzf
-    elif [ -f /usr/local/share/fzf/completion.$EXT ]; then
-      FZF_PATH=/usr/local/share/fzf
-    elif [ -f /usr/share/doc/fzf/examples/completion.$EXT ]; then
-      FZF_PATH=/usr/share/doc/fzf/examples/
-    fi
-  fi
-  [ -f "$FZF_PATH/completion.$EXT" ] && source "$FZF_PATH/completion.$EXT"
-  [ -f "$FZF_PATH/key-bindings.$EXT" ] && source "$FZF_PATH/key-bindings.$EXT"
-}
-
-init_ls
-init_fzf
-command -v vi >/dev/null 2>&1 && export VISUAL='vi'
-command -v vim >/dev/null 2>&1 && export VISUAL='vim'
-command -v grep >/dev/null 2>&1 && alias grep='grep --color=auto'
-command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd bash)"
-command -v bat >/dev/null 2>&1 && alias cat='bat'
-command -v delta >/dev/null 2>&1 && alias diff='delta'
-command -v tldr >/dev/null 2>&1 && export TLDR_AUTO_UPDATE_DISABLED=1
+[ -f "$HOME/scripts/function/commonrc.sh" ] && source "$HOME/scripts/function/commonrc.sh"
 
 
 RETURN_VALUE_PROMPT='`RET=$?; if [[ $RET != 0 ]]; then echo -n "!\[\033[31m\]$RET\[\033[00m\]"; fi`'
