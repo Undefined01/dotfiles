@@ -1,9 +1,15 @@
 declare -A ZINIT
 ZINIT[BIN_DIR]="${HOME}/.local/share/zinit"
-if [ ! -d "$ZINIT[BIN_DIR]" ]; then
+if [[ ! -d "$ZINIT[BIN_DIR]" || ! -f "$ZINIT[BIN_DIR]/zinit.zsh" ]]; then
     mkdir -p "$ZINIT[BIN_DIR]"
     echo "Installing Zinit to $ZINIT[BIN_DIR]"
-    git clone --depth=1 git@github.com:zdharma-continuum/zinit.git "$ZINIT[BIN_DIR]"
+    tmpdir=$(mktemp -d)
+    git clone --depth=1 --no-checkout git@github.com:zdharma-continuum/zinit.git "$tmpdir"
+    cp -r "$tmpdir/.git" "$ZINIT[BIN_DIR]"
+    rm -rf "$tmpdir"
+    cd "$ZINIT[BIN_DIR]"
+    git checkout
+    cd -
 fi
 source "${ZINIT[BIN_DIR]}/zinit.zsh"
 autoload -Uz _zinit
@@ -36,8 +42,8 @@ HISTFILE="$HOME/.bash_history"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt BANG_HIST                 # Perform textual history expansion, csh-style, treating the character `!' specially.
-setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits. Conflict with `share_history'.
-# setopt SHARE_HISTORY             # Share history between all sessions. Also add timestamps as EXTEND_HISTORY.
+# setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits. Conflict with `share_history'.
+setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 # setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded previously.
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
