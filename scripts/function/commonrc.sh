@@ -3,7 +3,10 @@ function __common_rc_get_shell() {
 }
 
 function __common_rc_init_ls() {
-  if command -v exa >/dev/null 2>&1; then
+  if command -v eza >/dev/null 2>&1; then
+    alias ls='eza --color=auto'
+    alias ll='eza --color=auto --long --all --color-scale all --extended'
+  elif command -v exa >/dev/null 2>&1; then
     alias ls='exa --color=auto'
     alias ll='exa --color=auto --long --all --color-scale --extended'
   else
