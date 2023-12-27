@@ -37,7 +37,7 @@ pacman -Su
 
 # mirror
 sed -e '1iServer = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' -i /etc/pacman.d/mirrorlist
-sed -e '/ParallelDownloads/c\ParallelDownloads = 16' -i /etc/pacman.conf
+sed -e '/ParallelDownloads/c\ParallelDownloads = 8' -i /etc/pacman.conf
 
 # sudo
 SUDOGROUP=wheel
@@ -49,7 +49,7 @@ echo "%$SUDOGROUP ALL=(ALL) ALL" > /etc/sudoers.d/$SUDOGROUP
 
 # cli
 pacman -S --needed --noconfirm wget curl vi vim openssh git less python man tar zip unzip p7zip zstd psmisc
-pacman -S --needed --noconfirm zsh fish git-delta exa bat tldr dust ripgrep fd jq fzf glances zoxide
+pacman -S --needed --noconfirm zsh fish git-delta exa bat tldr dust ripgrep fd jq fzf glances zoxide tokei
 
 # bluetooth
 pacman -S --needed --noconfirm blueman
@@ -77,6 +77,9 @@ pacman -S --needed --noconfirm adobe-source-code-pro-fonts adobe-source-sans-fon
 pacman -S --needed --noconfirm gnu-free-fonts firefox
 pacman -S --needed --noconfirm p7zip mpv tumbler ffmpegthumbnailer
 pacman -S --needed --noconfirm fcitx5-im fcitx5-rime
+
+# language server
+pacman -S --needed --noconfirm bash-language-server python-lsp-server clangd jdtls rust-analyzer
 
 # yay
 pacman -S --needed git base-devel

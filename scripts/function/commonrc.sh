@@ -38,8 +38,8 @@ function __common_rc_init_tldr() {
     export TLDR_LANGUAGE="en"
     # export TLDR_PAGES_SOURCE_LOCATION="https://cdn.jsdelivr.net/gh/tldr-pages/tldr/"
     # export TLDR_DOWNLOAD_CACHE_LOCATION="https://cdn.jsdelivr.net/gh/tldr-pages/tldr-pages.github.io/blob/main/assets/tldr.zip"
-    export TLDR_PAGES_SOURCE_LOCATION="https://ghproxy.com/https://github.com/tldr-pages/tldr/blob/main/"
-    export TLDR_DOWNLOAD_CACHE_LOCATION="https://ghproxy.com/https://github.com/tldr-pages/tldr-pages.github.io/blob/main/assets/tldr.zip"
+    export TLDR_PAGES_SOURCE_LOCATION="https://mirror.ghproxy.com/https://github.com/tldr-pages/tldr/blob/main/"
+    export TLDR_DOWNLOAD_CACHE_LOCATION="https://mirror.ghproxy.com/https://github.com/tldr-pages/tldr-pages.github.io/blob/main/assets/tldr.zip"
     export TLDR_CACHE_ENABLED=1
     export TLDR_CACHE_MAX_AGE=8760
     export TLDR_AUTO_UPDATE_DISABLED=1
