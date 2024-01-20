@@ -79,7 +79,7 @@ pacman -S --needed --noconfirm p7zip mpv tumbler ffmpegthumbnailer
 pacman -S --needed --noconfirm fcitx5-im fcitx5-rime
 
 # language server
-pacman -S --needed --noconfirm bash-language-server python-lsp-server clangd jdtls rust-analyzer
+pacman -S --needed --noconfirm vscode-json-languageserver bash-language-server python-lsp-server clangd jdtls rust-analyzer
 
 # yay
 pacman -S --needed git base-devel
