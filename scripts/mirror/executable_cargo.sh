@@ -3,11 +3,10 @@
 if [ ! -f "$HOME/.cargo/config" ]; then
     cat >"$HOME/.cargo/config" <<EOF
 [source.crates-io]
-registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'ustc'
 
 [source.ustc]
-registry = "https://mirrors.ustc.edu.cn/crates.io-index"
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 
 EOF
 else
