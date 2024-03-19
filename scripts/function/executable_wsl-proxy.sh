@@ -6,7 +6,7 @@
 set -e
 
 hostip=$(cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }')
-wslip=$(hostname -I | awk '{print $1}')
+wslip=$(ip route get 1 | awk '{print $7}')
 port=${port:-7891}
 
 PROXY_HTTP="http://${hostip}:${port}"
