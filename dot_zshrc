@@ -38,7 +38,6 @@ zi light _local/cmdtime
 PS1='%F{green}%~%f%(?..!%F{red}%?%f)%(!.#.$) '
 
 
-HISTFILE="$HOME/.bash_history"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt BANG_HIST                 # Perform textual history expansion, csh-style, treating the character `!' specially.

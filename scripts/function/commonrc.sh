@@ -31,6 +31,11 @@ function __common_rc_init_fzf() {
   fi
   [ -f "$FZF_PATH/completion.$EXT" ] && source "$FZF_PATH/completion.$EXT"
   [ -f "$FZF_PATH/key-bindings.$EXT" ] && source "$FZF_PATH/key-bindings.$EXT"
+
+  export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build}"
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --type f"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
+  export FZF_DEFAULT_OPTS="--layout=reverse --preview '(bat -f -n {} || cat {}) 2> /dev/null | head -500'"
 }
 
 function __common_rc_init_tldr() {
@@ -56,5 +61,6 @@ command -v grep >/dev/null 2>&1 && alias grep='grep --color=auto'
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd cd $(__common_rc_get_shell))"
 command -v bat >/dev/null 2>&1 && alias cat='bat'
 command -v delta >/dev/null 2>&1 && alias diff='delta'
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init $(__common_rc_get_shell) --disable-up-arrow)"
 
 

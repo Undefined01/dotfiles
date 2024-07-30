@@ -37,6 +37,7 @@ pacman -Su
 
 # mirror
 sed -e '1iServer = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' -i /etc/pacman.d/mirrorlist
+sed -e '2iServer = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' -i /etc/pacman.d/mirrorlist
 sed -e '/ParallelDownloads/c\ParallelDownloads = 8' -i /etc/pacman.conf
 
 # sudo
