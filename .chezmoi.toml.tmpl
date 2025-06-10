@@ -2,3 +2,17 @@ encryption = "age"
 [age]
     identity = "~/.ssh/id_ed25519"
     symmetric = true
+[merge]
+command = "bash"
+args = [
+    "-c",
+    "cp {{ "{{" }} .Target {{ "}}" }} {{ "{{" }} .Target {{ "}}" }}.base && 
+        {{- " " -}}
+        {{- if eq .chezmoi.os "darwin" -}}
+            /Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code
+        {{- else -}}
+            code
+        {{- end -}}
+        {{- " " -}}
+        --new-window --wait --merge {{ "{{" }} .Destination {{ "}}" }} {{ "{{" }} .Target {{ "}}" }} {{ "{{" }} .Target {{ "}}" }}.base {{ "{{" }} .Source {{ "}}" }}",
+]
